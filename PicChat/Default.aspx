@@ -18,13 +18,24 @@
             _SetChatTextScrollPosition();
         }
 
-        function storeinput(value) {
-            document.getElementById("hidValue").value = value;
-        }
+//        function storeinput(value) {
+//            document.getElementById("hidValue").value = value;
+//        }
     </script>
 
     <form id="form1" runat="server" style="background-color: #ADC9D1">
-        <input type="hidden" id="hidValue" runat="server" />
+        <%--<input type="hidden" id="hidValue" runat="server" />--%>
+        <asp:LoginName ID="LoginName1" runat="server" />
+        <asp:LoginView ID="LoginView1" runat="server">
+            <AnonymousTemplate>
+                You are not logged in.<asp:HyperLink ID="HyperLink1" runat="server" 
+                    NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
+                &nbsp;
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+                You are logged in.
+            </LoggedInTemplate>
+        </asp:LoginView>
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
         <asp:UpdatePanel ID="ChatUpdatePanel" runat="server" UpdateMode="Always">
             <ContentTemplate>

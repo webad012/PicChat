@@ -13,8 +13,8 @@ namespace PicChat
         private Chatter m_chatter = Chatter.ActiveChatters().Values.Last();
         protected void Page_Load(object sender, EventArgs e)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "prompt", "var value = prompt('Enter your message here.'); storeinput(value);", true);
-            m_chatter.Name = hidValue.Value;
+            //ClientScript.RegisterStartupScript(this.GetType(), "prompt", "var value = prompt('Enter your message here.'); storeinput(value);", true);
+            //m_chatter.Name = hidValue.Value;
 
             _UpdateChatterList();
             _UpdateChatMessageList();

@@ -35,6 +35,9 @@ namespace PicChat
                 return false;
             }
 
+            Chatter new_chatter = new Chatter(new Guid(), userName);
+            new_chatter.Join(Chat.ActiveChats()[0]);
+
             FormsAuthentication.RedirectFromLoginPage(userName, false);
             return true;
         }

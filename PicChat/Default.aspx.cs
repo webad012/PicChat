@@ -13,8 +13,9 @@ namespace PicChat
         private Chatter m_chatter = new Chatter(new Guid(), "Anonymous");
         protected void Page_Load(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(Page.User.Identity.Name);
-            System.Diagnostics.Debug.WriteLine(HttpContext.Current.User.Identity.Name);
+            m_chatter.Name = HttpContext.Current.User.Identity.Name;
+            //System.Diagnostics.Debug.WriteLine(Page.User.Identity.Name);
+            //System.Diagnostics.Debug.WriteLine(HttpContext.Current.User.Identity.Name);
             //if( Page.User.Identity.name )
 
             _UpdateChatterList();
@@ -22,14 +23,20 @@ namespace PicChat
         }
         private void _UpdateChatMessageList()
         {
-            ChatMessageList.DataSource = m_chat.Messages;
-            ChatMessageList.DataBind();
+            if (ChatMessageList.Items.Count != m_chat.Messages.Count)
+            {
+                ChatMessageList.DataSource = m_chat.Messages;
+                ChatMessageList.DataBind();
+            }
         }
         private void _UpdateChatterList()
         {
-            ChattersBulletedList.DataSource = m_chat.Chatters;
-            ChattersBulletedList.DataTextField = "Name";
-            ChattersBulletedList.DataBind();
+            if (ChattersBulletedList.Items.Count != m_chat.Chatters.Count)
+            {
+                ChattersBulletedList.DataSource = m_chat.Chatters;
+                ChattersBulletedList.DataTextField = "Name";
+                ChattersBulletedList.DataBind();
+            }
         }
         protected void SendButton_Click(object sender, EventArgs e)
         {
@@ -41,6 +48,18 @@ namespace PicChat
             }
             _UpdateChatterList();
             _UpdateChatMessageList();
+        }
+
+        protected void LoginStatus1_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            foreach (var c in m_chat.Chatters)
+            {
+                if (c.Name.Equals(m_chatter.Name))
+                {
+                    m_chat.Chatters.Remove(c);
+                    break;
+                }
+            }
         }
     }
 }

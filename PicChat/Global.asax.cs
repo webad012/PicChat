@@ -11,18 +11,25 @@ namespace PicChat
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            List<Chatter> chatters = new List<Chatter>();
-            //chatters.Add(new Chatter(Guid.NewGuid(), "Senad"));
-            //chatters.Add(new Chatter(Guid.NewGuid(), "Bojana"));
-            chatters.Add(new Chatter(new Guid(), "Anonymous"));
-            Application.Add("Chatters", chatters);
-
-            List<Chat> chats = new List<Chat>();
-            chats.Add(new Chat());
-            Application.Add("Chats", chats);
-            foreach (KeyValuePair<Guid, Chatter> chatter in Chatter.ActiveChatters())
+            if (HttpContext.Current.Application["Chatters"] == null)
             {
-                chatter.Value.Join(Chat.ActiveChats()[0]);
+                List<Chatter> chatters = new List<Chatter>();
+                //chatters.Add(new Chatter(Guid.NewGuid(), "Senad"));
+                //chatters.Add(new Chatter(Guid.NewGuid(), "Bojana"));
+                //chatters.Add(new Chatter(new Guid(), "Anonymous"));
+                Application.Add("Chatters", chatters);
+            }
+
+            if (HttpContext.Current.Application["Chats"] == null)
+            {
+                List<Chat> chats = new List<Chat>();
+                chats.Add(new Chat());
+                Application.Add("Chats", chats);
+
+                foreach (KeyValuePair<Guid, Chatter> chatter in Chatter.ActiveChatters())
+                {
+                    chatter.Value.Join(Chat.ActiveChats()[0]);
+                }
             }
         }
 

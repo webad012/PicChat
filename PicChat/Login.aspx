@@ -10,13 +10,28 @@
     <form id="form1" runat="server">
     <div>
     
-        Login<br />
+        <br />
         <asp:Login ID="Login2" runat="server" onauthenticate="Login2_Authenticate">
         </asp:Login>
     
     </div>
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
         ValidationGroup="Login2" />
+    <div>
+    
+        Register<br />
+        <asp:Label ID="Label1" runat="server" Text="User name:"></asp:Label>
+&nbsp;<asp:TextBox ID="usernameTextBox" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label2" runat="server" Text="Password:"></asp:Label>
+        <asp:TextBox ID="passwordTextBox" runat="server"></asp:TextBox>
+        <br />
+        <asp:Button ID="registerButton" runat="server" onclick="registerButton_Click" 
+            Text="Register" />
+    </div>
+    <p>
+        <asp:Label ID="registerErrorLabel" runat="server"></asp:Label>
+    </p>
     </form>
 </body>
 </html>

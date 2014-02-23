@@ -11,7 +11,6 @@ namespace PicChat
     public partial class Login : System.Web.UI.Page
     {
         protected PicChatDBEntities1 entities = new PicChatDBEntities1();
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -38,6 +37,58 @@ namespace PicChat
 
             FormsAuthentication.RedirectFromLoginPage(userName, false);
             return true;
+        }
+
+        protected void registerButton_Click(object sender, EventArgs e)
+        {
+            if (usernameTextBox.Text.Trim().Length == 0)
+            {
+                registerErrorLabel.Text = "Username empty";
+            }
+            else
+            {
+                var user = from u in entities.Users
+                           where u.Username == usernameTextBox.Text
+                           select u;
+
+                if (user.Count() != 0)
+                {
+                    registerErrorLabel.Text = "Username taken";
+                }
+                else
+                {
+                    if (passwordTextBox.Text.Trim().Length == 0)
+                    {
+                        registerErrorLabel.Text = "Password empty";
+                    }
+                    else
+                    {
+                        PicChatDBEntities1 transac_entities = new PicChatDBEntities1();
+                        transac_entities.Connection.Open();
+                        System.Data.Common.DbTransaction transaction = transac_entities.Connection.BeginTransaction();
+                        try
+                        {
+                            User newuser = new User()
+                            {
+                                Username = usernameTextBox.Text,
+                                Password = passwordTextBox.Text
+                            };
+
+                            transac_entities.Users.AddObject(newuser);
+                            transac_entities.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            registerErrorLabel.Text = "Error creating user";
+                            return;
+                        }
+
+                        transaction.Commit();
+                        registerErrorLabel.Text = "Successful registration";
+                    }
+                }
+            }
         }
     }
 }

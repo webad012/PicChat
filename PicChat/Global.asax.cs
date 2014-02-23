@@ -9,13 +9,12 @@ namespace PicChat
 {
     public class Global : System.Web.HttpApplication
     {
-
         protected void Application_Start(object sender, EventArgs e)
         {
             List<Chatter> chatters = new List<Chatter>();
             //chatters.Add(new Chatter(Guid.NewGuid(), "Senad"));
             //chatters.Add(new Chatter(Guid.NewGuid(), "Bojana"));
-            chatters.Add(new Chatter(new Guid(), "Milos"));
+            chatters.Add(new Chatter(new Guid(), "Anonymous"));
             Application.Add("Chatters", chatters);
 
             List<Chat> chats = new List<Chat>();

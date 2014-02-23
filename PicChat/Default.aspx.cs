@@ -10,11 +10,12 @@ namespace PicChat
     public partial class Default : System.Web.UI.Page
     {
         private Chat m_chat = Chat.ActiveChats()[0];
-        private Chatter m_chatter = Chatter.ActiveChatters().Values.Last();
+        private Chatter m_chatter = new Chatter(new Guid(), "Anonymous");
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ClientScript.RegisterStartupScript(this.GetType(), "prompt", "var value = prompt('Enter your message here.'); storeinput(value);", true);
-            //m_chatter.Name = hidValue.Value;
+            System.Diagnostics.Debug.WriteLine(Page.User.Identity.Name);
+            System.Diagnostics.Debug.WriteLine(HttpContext.Current.User.Identity.Name);
+            //if( Page.User.Identity.name )
 
             _UpdateChatterList();
             _UpdateChatMessageList();

@@ -6,3 +6,4 @@ D:\Projekti\PicChat\trunk\PicChat\bin\PicChat.dll
 D:\Projekti\PicChat\trunk\PicChat\bin\PicChat.pdb
 D:\Projekti\PicChat\trunk\PicChat\obj\Debug\PicChat.dll
 D:\Projekti\PicChat\trunk\PicChat\obj\Debug\PicChat.pdb
+D:\Projekti\PicChat\trunk\PicChat\obj\Debug\PicChat.csprojResolveAssemblyReference.cache

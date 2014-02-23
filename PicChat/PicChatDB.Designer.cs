@@ -24,32 +24,32 @@ namespace PicChat
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class PicChatDBContainer : ObjectContext
+    public partial class PicChatDBEntities1 : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new PicChatDBContainer object using the connection string found in the 'PicChatDBContainer' section of the application configuration file.
+        /// Initializes a new PicChatDBEntities1 object using the connection string found in the 'PicChatDBEntities1' section of the application configuration file.
         /// </summary>
-        public PicChatDBContainer() : base("name=PicChatDBContainer", "PicChatDBContainer")
+        public PicChatDBEntities1() : base("name=PicChatDBEntities1", "PicChatDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new PicChatDBContainer object.
+        /// Initialize a new PicChatDBEntities1 object.
         /// </summary>
-        public PicChatDBContainer(string connectionString) : base(connectionString, "PicChatDBContainer")
+        public PicChatDBEntities1(string connectionString) : base(connectionString, "PicChatDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new PicChatDBContainer object.
+        /// Initialize a new PicChatDBEntities1 object.
         /// </summary>
-        public PicChatDBContainer(EntityConnection connection) : base(connection, "PicChatDBContainer")
+        public PicChatDBEntities1(EntityConnection connection) : base(connection, "PicChatDBEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -68,18 +68,18 @@ namespace PicChat
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Users> Users
+        public ObjectSet<User> Users
         {
             get
             {
                 if ((_Users == null))
                 {
-                    _Users = base.CreateObjectSet<Users>("Users");
+                    _Users = base.CreateObjectSet<User>("Users");
                 }
                 return _Users;
             }
         }
-        private ObjectSet<Users> _Users;
+        private ObjectSet<User> _Users;
 
         #endregion
 
@@ -88,9 +88,9 @@ namespace PicChat
         /// <summary>
         /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToUsers(Users users)
+        public void AddToUsers(User user)
         {
-            base.AddObject("Users", users);
+            base.AddObject("Users", user);
         }
 
         #endregion
@@ -104,26 +104,22 @@ namespace PicChat
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="PicChatDB", Name="Users")]
+    [EdmEntityTypeAttribute(NamespaceName="PicChatDBModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Users : EntityObject
+    public partial class User : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Users object.
+        /// Create a new User object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="username">Initial value of the Username property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
-        public static Users CreateUsers(global::System.Int32 id, global::System.String username, global::System.String password)
+        public static User CreateUser(global::System.Int32 id)
         {
-            Users users = new Users();
-            users.Id = id;
-            users.Username = username;
-            users.Password = password;
-            return users;
+            User user = new User();
+            user.Id = id;
+            return user;
         }
 
         #endregion
@@ -160,7 +156,7 @@ namespace PicChat
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Username
         {
@@ -172,7 +168,7 @@ namespace PicChat
             {
                 OnUsernameChanging(value);
                 ReportPropertyChanging("Username");
-                _Username = StructuralObject.SetValidValue(value, false);
+                _Username = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Username");
                 OnUsernameChanged();
             }
@@ -184,7 +180,7 @@ namespace PicChat
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Password
         {
@@ -196,7 +192,7 @@ namespace PicChat
             {
                 OnPasswordChanging(value);
                 ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
+                _Password = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Password");
                 OnPasswordChanged();
             }

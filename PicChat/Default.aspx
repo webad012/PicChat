@@ -37,6 +37,7 @@
             </LoggedInTemplate>
         </asp:LoginView>
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
+        <asp:LoginStatus ID="LoginStatus1" runat="server" />
         <asp:UpdatePanel ID="ChatUpdatePanel" runat="server" UpdateMode="Always">
             <ContentTemplate>
                 Chatters<br/>

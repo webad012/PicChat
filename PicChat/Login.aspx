@@ -11,7 +11,7 @@
     <div>
     
         Login<br />
-        <asp:Login ID="Login2" runat="server">
+        <asp:Login ID="Login2" runat="server" onauthenticate="Login2_Authenticate">
         </asp:Login>
     
     </div>
